@@ -127,9 +127,13 @@ public class SchoolgirlSolver {
     //   System.out.println();
     // }
     // System.out.println();
-    // System.out.println();
+    // System.out.println("Current Girl = " + currentGirl);
+    // System.out.println("Current X    = " + x);
+    // System.out.println("X % 3        = " + x%3);
+    // System.out.println("Current Y    = " + y);
+    // System.out.println("Can Place    = " + this.canPlace( currentGirl, y, x));
 
-    //numOfRuns ++;
+    numOfRuns ++;
     if( x < 15){
       if( y == 0 ){
         return solver(currentGirl, y + 1, x);
@@ -137,8 +141,9 @@ public class SchoolgirlSolver {
       if( x == 0 || x == 3 || x == 6 ){
         return solver(currentGirl, y, x + 1);
       }
+
       if( this.canPlace( currentGirl, y, x) ){
-        //System.out.println("can place !!");
+        System.out.println("can place !!");
         girlGroups[y][x] = currentGirl;
         this.fillAdjMatrix(currentGirl, y, x);
         // if(numOfRuns == 2){
@@ -147,30 +152,34 @@ public class SchoolgirlSolver {
         return solver( currentGirl + 1, y, x + 1 );
       }
       else if( x%3 != 2 && currentGirl <= 11 ) {
-      //  System.out.println("bumping girl up 1");
+        //System.out.println("bumping girl up 1");
+        return solver( currentGirl + 1, y, x);
+      }
+      else if (x%3 == 2 && currentGirl <= 14) {
+        //System.out.println("bumping girl up 1");
         return solver( currentGirl + 1, y, x);
       }
       else if( x == 1  && currentGirl > 11 ){
-      //  System.out.println("recursed 1 !!!");
+        //System.out.println("recursed 1 !!!");
         this.clearAdjMatrix(girlGroups[y][x - 1], y, x);
         return solver(girlGroups[y-1][14] + 1, y - 1, 14);
       }
       else if( x%3 !=2 && currentGirl > 11){
-      //  System.out.println("recursed 2 !!!");
+        //System.out.println("recursed 2 !!!");
         this.clearAdjMatrix(girlGroups[y][x - 1], y, x);
         return solver( girlGroups[y][x - 1] + 1, y, x - 1);
       }
       else if(x%3 == 2 && currentGirl > 14 ){
-      //  System.out.println(" recused 3 !!!");
+        //System.out.println(" recused 3 !!!");
         this.clearAdjMatrix(girlGroups[y][x - 1], y, x);
         return solver( girlGroups[y][x - 1] + 1, y, x - 1);
       }
     }
     else if( y < 7 && x >= 15 ){
-    //  System.out.println("made it to the end!");
+      //System.out.println("made it to the end!");
       return solver( 1, y + 1, 0);
     }
-
+    //System.out.println("Is returning girlGroups");
     return girlGroups;
   }
 
@@ -212,12 +221,12 @@ public class SchoolgirlSolver {
     // girl.fillAdjMatrix( 6, 1, 2);
     // System.out.println();
 
-    for(int y = 0; y < 7; y++){
-      for(int x = 0; x < 15; x++){
-        System.out.print( girl.girlGroups[y][x] + " " );
-      }
-      System.out.println();
-    }
+    // for(int y = 0; y < 7; y++){
+    //   for(int x = 0; x < 15; x++){
+    //     System.out.print( girl.girlGroups[y][x] + " " );
+    //   }
+    //   System.out.println();
+    // }
 
     // for(int y = 0; y < 15; y++){
     //   for(int x = 0; x < 15; x++){
