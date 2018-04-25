@@ -111,7 +111,7 @@ public class SchoolgirlSolver {
   // M N and O aka 12, 13, 14 are in the **index** %3 == 2
 
   //System.out.println(Arrays.toString(boolArr));
-      int numOfRuns = 0;
+      int canPlaceGirl = 0;
   public int[][] solver( int currentGirl, int y, int x ){
     //System.out.println(currentGirl);
     // for(int i = 0; i < 7; i++){
@@ -133,7 +133,7 @@ public class SchoolgirlSolver {
     // System.out.println("Current Y    = " + y);
     // System.out.println("Can Place    = " + this.canPlace( currentGirl, y, x));
 
-    numOfRuns ++;
+    //numOfRuns ++;
     if( x < 15){
       if( y == 0 ){
         return solver(currentGirl, y + 1, x);
@@ -143,12 +143,16 @@ public class SchoolgirlSolver {
       }
 
       if( this.canPlace( currentGirl, y, x) ){
-        System.out.println("can place !!");
+        canPlaceGirl ++;
+        System.out.println(canPlaceGirl + "   " + y);
         girlGroups[y][x] = currentGirl;
         this.fillAdjMatrix(currentGirl, y, x);
         // if(numOfRuns == 2){
         //   return girlGroups;
         // }
+        if( x == 14 ){
+          return solver( 3, y + 1, 1);
+        }
         return solver( currentGirl + 1, y, x + 1 );
       }
       else if( x%3 != 2 && currentGirl <= 11 ) {
@@ -157,6 +161,7 @@ public class SchoolgirlSolver {
       }
       else if (x%3 == 2 && currentGirl <= 14) {
         //System.out.println("bumping girl up 1");
+        System.out.println( y + " " + x );
         return solver( currentGirl + 1, y, x);
       }
       else if( x == 1  && currentGirl > 11 ){
@@ -194,32 +199,38 @@ public class SchoolgirlSolver {
     // System.out.println(girl.canPlace( 3, 1, 1));
 
     //this format of updateAdjMatrix allows for update girlGroups in the current and last slot(s)
-    //girl.updateAdjMatrix( 1, 0 );
-    //girl.updateAdjMatrix( 2, 0 );
-    //girl.updateAdjMatrix( 1, 2 );
-    //girl.initConditionAdjMatrix();
 
-    girl.solver( 0, 0, 0);
+    // girl.solver( 0, 0, 0);
+    // System.out.println(girl.canPlaceGirl);
 
     // for (int in = 0; in < 5; in++) {
     //   girl.fillAdjMatrix(4 + in, 8);
     // }
 
-    // for(int y = 0; y < 15; y++){
-    //   for(int x = 0; x < 15; x++){
-    //     System.out.print(girl.adjMatrix[y][x] + " " );
-    //   }
-    //   System.out.println();
-    // }
-
     System.out.println();
 
-    // girl.girlGroups[1][1] = 3;
-    // System.out.println(girl.canPlace( 4, 1, 2 ));
-    // System.out.println(girl.canPlace( 5, 1, 2 ));
-    // System.out.println(girl.canPlace( 6, 1, 2 ));
-    // girl.fillAdjMatrix( 6, 1, 2);
-    // System.out.println();
+    girl.girlGroups[1][1] = 3;
+    System.out.println(girl.canPlace( 4, 1, 2 ));
+    System.out.println(girl.canPlace( 5, 1, 2 ));
+    System.out.println(girl.canPlace( 6, 1, 2 ));
+    girl.fillAdjMatrix( 6, 1, 2);
+    System.out.println();
+
+    for(int y = 0; y < 15; y++){
+      for(int x = 0; x < 15; x++){
+        System.out.print(girl.adjMatrix[y][x] + " " );
+      }
+      System.out.println();
+    }
+
+    girl.clearAdjMatrix( 6, 1, 2);
+
+    for(int y = 0; y < 15; y++){
+      for(int x = 0; x < 15; x++){
+        System.out.print(girl.adjMatrix[y][x] + " " );
+      }
+      System.out.println();
+    }
 
     // for(int y = 0; y < 7; y++){
     //   for(int x = 0; x < 15; x++){
