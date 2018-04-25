@@ -52,30 +52,30 @@ public class SchoolgirlSolver2 {
     int lastGirl = 0;
     boolean group = true;
     if( canWalkToday( currentSlot ) ){
-      System.out.println("can walk!");
+      //System.out.println("can walk!");
       if( currentWalker > 14){
-        System.out.println("1");
+        //System.out.println("1");
         return false;
       }
       if( currentSlot%3 == 0 && currentSlot/15 != 0 ){
         if(currentWalker < girlGroups[currentSlot] ){
-          System.out.println("2");
+          //System.out.println("2");
           return false;
         }
       }
       if( currentSlot > 15 && currentSlot%15 == 1 && currentWalker < girlGroups[currentSlot - 15 ] ){
-        System.out.println("3");
+        //System.out.println("3");
         return false;
       }
       for(int i = girlSlot; i > 0; i-- ){
         lastGirl = girlGroups[currentSlot - 1];
         group = adjMatrix[lastGirl][currentWalker];
         if( lastGirl > currentWalker ){
-          System.out.println("4");
+          //System.out.println("4");
           group = false;
         }
         if( group == false ){
-          System.out.println("5");
+          //System.out.println("5");
           return group;
         }
       }
@@ -138,17 +138,17 @@ public class SchoolgirlSolver2 {
 
   int counter = 0;
   public void placeGirlsFrom( int slot ){
-    System.out.println( "count :: " + counter++ );
-    System.out.println( "Slot :: " + slot );
+    //System.out.println( "count :: " + counter++ );
+    //System.out.println( "Slot :: " + slot );
     int start = determineFirstWalker( slot );
     int end = determineLastWalker( slot );
-    System.out.println("start :: " + start);
-    System.out.println( "end :: " + end);
+    //System.out.println("start :: " + start);
+    //System.out.println( "end :: " + end);
     for( int x = start; x < end; x++ ){
       if( this.canPlace( girlsToPlace[x], slot ) ){
-        System.out.println("can place!");
+        //System.out.println("can place!");
         this.placeGirl( girlsToPlace[x], slot);
-        if( slot == LAST_SLOT){
+        if( slot == 5){
           this.finish();
         }
         else{
@@ -156,15 +156,15 @@ public class SchoolgirlSolver2 {
         }
       }
       else{
-        System.out.println("cannot place");
+        //System.out.println("cannot place");
         this.clearMatricies( slot - 1, slot - 2);
         this.placeGirlsFrom( slot - 1 );
       }
     }
   }
 
-  public String finish(){
-    return Arrays.toString(girlGroups);
+  public void finish(){
+    System.out.println(Arrays.toString(girlGroups));
   }
 
   public static void main( String args[]){
@@ -188,6 +188,5 @@ public class SchoolgirlSolver2 {
     //   System.out.println();
     // }
     girl.placeGirlsFrom(0);
-    System.out.println( girl.finish() );
   }
 }
