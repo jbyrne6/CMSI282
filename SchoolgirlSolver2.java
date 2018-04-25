@@ -148,7 +148,7 @@ public class SchoolgirlSolver2 {
       if( this.canPlace( girlsToPlace[x], slot ) ){
         //System.out.println("can place!");
         this.placeGirl( girlsToPlace[x], slot);
-        if( slot == 5){
+        if( slot == LAST_SLOT){
           this.finish();
         }
         else{
