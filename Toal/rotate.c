@@ -5,7 +5,6 @@
 char* theRotater( char* rString, int iterations ) {
   int inputLen = strlen(rString);
   int wrapAround = (iterations + inputLen)%inputLen;
-  // int wrapAround = (iterations + inputLen)%inputLen + 1;
   char* doubleString = malloc (inputLen*2 + 1);
   char* answer = malloc( inputLen + 1);
 
@@ -18,7 +17,6 @@ char* theRotater( char* rString, int iterations ) {
 
   // memmove( doubleString, doubleString + wrapAround, inputLen);
   // strncat( answer, doubleString, inputLen);
-  // answer[inputLen] = '\0';
 
   doublePointer += wrapAround;
 
@@ -34,7 +32,6 @@ char* theRotater( char* rString, int iterations ) {
 }
 
 int main () {
-  // printf("%s\n", theRotater( "doghouse", 3));
   printf("%s\n", theRotater( "doghouse", 5));
   return 0;
 }
