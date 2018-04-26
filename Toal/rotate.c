@@ -1,17 +1,26 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-char* theRotater( char* rString, int i ) {
-  int l = strlen(rString);
-  int wrapAround = (i + l)%l + 1;
-  char doubleString[l + l + 1]
-  char answer[l + 1];
+char* theRotater( char* rString, int iterations ) {
+  int inputLen = strlen(rString);
+  int wrapAround = (iterations + inputLen)%inputLen + 1;
+  char* doubleString = malloc (inputLen*2 + 1);
+  char* answer = malloc( inputLen + 1);
 
+  strcpy(doubleString, rString);
   strcat(doubleString, rString);
-  strcat(doubleString, rString);
 
-  for( int x = i; x < l; x++){
-    strcat(answer, doubleString[x]);
+
+  char* pointer = answer;
+  char* doublePointer = doubleString;
+  doublePointer += wrapAround;
+  //printf("%s\n", doublePointer);
+
+  for( int x = 0; x < inputLen; x++){
+    answer[x] = *doublePointer;
+    doublePointer++;
+    wrapAround++;
   }
 
   return answer;
@@ -19,6 +28,7 @@ char* theRotater( char* rString, int i ) {
 }
 
 int main () {
+  // printf("%s\n", theRotater( "doghouse", 3));
   printf("%s\n", theRotater( "doghouse", 3));
   return 0;
 }
